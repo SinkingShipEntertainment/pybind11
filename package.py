@@ -48,3 +48,5 @@ def pre_build_commands():
 
 def commands():
     env.PYBIND11_ROOT_DIR = "{root}"
+    env.pybind11_ROOT = "{root}"
+    env.pybind11_DIR = "{root}/share/cmake/pybind11"
