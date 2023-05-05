@@ -41,3 +41,6 @@ pybind11Targets.cmake
 /.vscode
 /pybind11/include/*
 /pybind11/share/*
+
+# SSE
+_rez_build
