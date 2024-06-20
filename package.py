@@ -30,8 +30,6 @@ variants = [
     # ['platform-linux', 'arch-x86_64', 'os-centos-7', "python-2.7"],  # pointless since we cannot use Python 2 with pybind11
     ['platform-linux', 'arch-x86_64', 'os-centos-7', "python-3.7"],
     ['platform-linux', 'arch-x86_64', 'os-centos-7', "python-3.9"],
-    ["python-3.10"],
-    ["python-3.11"],
 ]
 
 # If want to use Ninja, run:
@@ -46,22 +44,8 @@ uuid = "repository.pybind11"
 
 
 def pre_build_commands():
-    info = {}
-    with open("/etc/os-release", 'r') as f:
-        for line in f.readlines():
-            if line.startswith('#'):
-                continue
-            line_info = line.replace('\n', '').split('=')
-            if len(line_info) != 2:
-                continue
-            info[line_info[0]] = line_info[1].replace('"', '')
-    linux_distro = info.get("NAME", "centos")
-    print("Using Linux distro: " + linux_distro)
+    command("source /opt/rh/devtoolset-6/enable")
 
-    if linux_distro.lower().startswith("centos"):
-        command("source /opt/rh/devtoolset-6/enable")
-    elif linux_distro.lower().startswith("rocky"):
-        pass
 
 def commands():
     env.PYBIND11_ROOT_DIR = "{root}"
